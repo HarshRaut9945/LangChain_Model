@@ -81,6 +81,19 @@ def main():
         st.text_area("Preview", value=preview_text, height=200)
 
 
+        if st.button("Ask LLM"):
+            with st.spinner("Sending to llm...."):
+                formated_promt=prompt.format(text=preview_text)
+                response=llm.invoke(formated_promt)
+                try:
+                    parsed_json = json.loads(response.content)
+                    st.json(parsed_json)
+                except json.JSONDecodeError:
+                    st.write(response.content)  
+
+                st.write(response.content)
+
+
 
 
 #python main
