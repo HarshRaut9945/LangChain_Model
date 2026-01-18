@@ -1,0 +1,66 @@
+# ========================
+# Virtual Environment
+# ========================
+.venv/
+venv/
+env/
+ENV/
+
+# ========================
+# Environment variables
+# ========================
+.env
+.env.*
+!.env.example
+
+# ========================
+# Python cache / compiled files
+# ========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ========================
+# Jupyter Notebook
+# ========================
+.ipynb_checkpoints/
+
+# ========================
+# Logs
+# ========================
+*.log
+
+# ========================
+# OS files
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# IDE / Editor settings
+# ========================
+.vscode/
+.idea/
+*.swp
+
+# ========================
+# Python build files
+# ========================
+build/
+dist/
+*.egg-info/
+
+# ========================
+# LangChain / ML artifacts (optional)
+# ========================
+.cache/
+models/
+data/
+outputs/
+
+# ========================
+# Tests & coverage
+# ========================
+.coverage
+htmlcov/
+.pytest_cache/
