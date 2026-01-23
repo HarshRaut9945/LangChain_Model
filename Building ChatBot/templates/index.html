@@ -3,37 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="index.css">
+    <title>AI Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
+
 <body>
-    <!-- sidebar -->
+
+<div class="app-container">
+
+    <!-- Sidebar -->
     <div class="sidebar">
-        <a href="{{url_for('new_chat')}}" class="new-chat">New chat  </a>
+        <a href="{{ url_for('new_chat') }}" class="new-chat">+ New Chat</a>
+
         <div class="chat-history">
-            {% for chat in chats % }
-            <a href="url_for()" class="chat-items"></a>
+            {% for chat in chats %}
+                <a href="{{ url_for('view_chat', chat_id=chat[0]) }}"
+                   class="chat-item {% if chat[0] == current_chat %}active{% endif %}">
+                    {{ chat[1] }}
+                </a>
             {% endfor %}
         </div>
     </div>
 
-        <!-- chat area -->
-<div class="chat-container">
-<div class="chat-messages">
-{% for chat in chat_history %}
-{% if chat.sender == 'user' %}
-<div class="message user-message">{{chat.text}}</div>
-{% else %}
-<div class="message user-message">{{chat.text}}</div>
-{% endif %}
-{% endfor  %}
+
+    <!-- Chat Section -->
+    <div class="chat-container">
+
+        <div class="chat-messages" id="chat-box">
+            {% for chat in chat_history %}
+                {% if chat.sender == 'user' %}
+                    <div class="message user-message">
+                        {{ chat.text }}
+                    </div>
+                {% else %}
+                    <div class="message ai-message">
+                        {{ chat.text }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <form class="chat-input"
+              method="POST"
+              action="{{ url_for('send_message', chat_id=current_chat) }}">
+
+            <textarea name="message"
+                      placeholder="Type your message..."
+                      required></textarea>
+
+            <button type="submit">Send</button>
+        </form>
+
+    </div>
+
 </div>
 
-<form action="chat-input" method="post" action="url_for()">
-    <textarea name="message"  rows="1 " placeholder="Type your message..."   id=""></textarea>
-      <button type="submit ">Send</button>
-</form>
-</div>
+
+<!-- Auto Scroll Script -->
+<script>
+    const chatBox = document.getElementById("chat-box");
+    chatBox.scrollTop = chatBox.scrollHeight;
+</script>
 
 </body>
 </html>
