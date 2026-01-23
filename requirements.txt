@@ -1,34 +1,124 @@
+# ===============================
 # LangChain Core
+# ===============================
 langchain
 langchain-core
 langchain-community
 
-# OpenAI Integration
+# ===============================
+# LLM Providers
+# ===============================
+
+# OpenAI
 langchain-openai
 openai
 
-# Anthropic Integration
+# Anthropic (Claude)
 langchain-anthropic
 
-# Google Gemini Integration
+# Google Gemini
 langchain-google-genai
 google-generativeai
 
-# Hugging Face Integration
+# Hugging Face
 langchain-huggingface
 transformers
 huggingface-hub
+sentencepiece
+accelerate
 
-# Environment Variables
-python-dotenv
+# ===============================
+# Embeddings & Vector Databases
+# ===============================
 
-# ML Utilities
-numpy
-scikit-learn
+# Embeddings
+sentence-transformers
 
-# App
-streamlit
+# Vector Stores
+faiss-cpu
+chromadb
+pinecone-client
+weaviate-client
+qdrant-client
 
-# Document loaders support
+# ===============================
+# Document Loaders
+# ===============================
 pypdf
 docx2txt
+unstructured
+beautifulsoup4
+lxml
+markdown
+
+# ===============================
+# Text Processing
+# ===============================
+tiktoken
+regex
+nltk
+spacy
+
+# ===============================
+# Memory & Caching
+# ===============================
+redis
+diskcache
+
+# ===============================
+# Tools & Agents
+# ===============================
+duckduckgo-search
+wikipedia
+requests
+httpx
+aiohttp
+
+# ===============================
+# ML Utilities
+# ===============================
+numpy
+pandas
+scikit-learn
+scipy
+
+# ===============================
+# App Frameworks
+# ===============================
+streamlit
+flask
+fastapi
+uvicorn
+
+# ===============================
+# Environment & Config
+# ===============================
+python-dotenv
+pydantic
+pyyaml
+
+# ===============================
+# Logging & Monitoring
+# ===============================
+loguru
+rich
+
+# ===============================
+# Evaluation & Tracing
+# ===============================
+langsmith
+ragas
+
+# ===============================
+# Database (Optional)
+# ===============================
+sqlalchemy
+psycopg2-binary
+pymongo
+
+# ===============================
+# Dev Utilities
+# ===============================
+tqdm
+pytest
+black

@@ -4,13 +4,9 @@ import json
 import  streamlit as st
 
 from langchain_google_genai import ChatGoogleGenerativeAI
-# from langchain_community.document_loaders import (
-#     PyPDFLoader,
-#     Docx2txtLoader,
-#     TextLoader
-# )
+
 from langchain_community.document_loaders import PyPDFLoader, Docx2txtLoader, TextLoader
-# from langchain.prompts import PromptTemplate
+
 from langchain_core.prompts import PromptTemplate
 
 

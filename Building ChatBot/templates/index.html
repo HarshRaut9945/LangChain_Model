@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- sidebar -->
+    <div class="sidebar">
+        <a href="{{url_for('new_chat')}}" class="new-chat">New chat  </a>
+        <div class="chat-history">
+            {% for chat in chats % }
+            <a href="url_for()" class="chat-items"></a>
+            {% endfor %}
+        </div>
+    </div>
+
+        <!-- chat area -->
+<div class="chat-container">
+<div class="chat-messages">
+{% for chat in chat_history %}
+{% if chat.sender == 'user' %}
+<div class="message user-message">{{chat.text}}</div>
+{% else %}
+<div class="message user-message">{{chat.text}}</div>
+{% endif %}
+{% endfor  %}
+</div>
+
+<form action="chat-input" method="post" action="url_for()">
+    <textarea name="message"  rows="1 " placeholder="Type your message..."   id=""></textarea>
+      <button type="submit ">Send</button>
+</form>
+</div>
+
+</body>
+</html>
