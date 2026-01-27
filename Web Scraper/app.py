@@ -18,7 +18,44 @@ user_agent = st.sidebar.selectbox("Choose User Agent", USER_AGENTS)
 st.set_page_config(page_title='Langchain Scaper',layout='wide')
 st.title('Lanchain Scrapper')
 
-url=st.text("Enter Website URL...")
+url=st.text_input("Enter Website URL...")
 
 if st.button('Scrap Content'):
-    pass
+    with st.spinner("Scapping Contents..Few minutes"):
+        if not url:
+            st.error('Please enter a valid URl')
+        else:
+            try:
+                docs=[]
+
+                if scraper_choice == "Unstructured Loader":
+                    loader = UnstructuredURLLoader(urls=[url], headers={"User-Agent": user_agent})
+                    docs = loader.load()
+
+                elif scraper_choice == "Selenium Loader":
+                    loader = SeleniumURLLoader(urls=[url],headless=False, browser='chrome')
+                    docs = loader.load()
+
+                elif scraper_choice == "WebBase Loader":
+                    loader = WebBaseLoader(url, header_template={"User-Agent": user_agent})
+                    docs = loader.load()
+
+                # Display output
+                if docs:
+                    full_text = "\n\n".join([doc.page_content for doc in docs])
+
+                    # Snippet Preview
+                    st.subheader("📌 Snippet Preview:")
+                    st.write(full_text[:1000] + ("..." if len(full_text) > 1000 else ""))
+
+                    # View All + Copy
+                    st.subheader("📖 Full Content:")
+                    with st.expander("Click to View Full Text"):
+                        st.text_area("Scraped Text", full_text, height=400)
+                        st.download_button("📋 Copy/Download Text", full_text, file_name="scraped_content.txt")
+
+                else:
+                    st.warning("⚠️ No content extracted. Try another scraper or user-agent.")
+
+            except Exception as e:
+                st.error(f"❌ Error: {str(e)}")
