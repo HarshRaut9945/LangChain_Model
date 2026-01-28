@@ -1,11 +1,15 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.schema import HumanMessage,AIMessage,SystemMessage
+from langchain.schema import HumanMessage, AIMessage, SystemMessage
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
+
+
 class LangChainClient:
-    def __init__(self,mode='General'):
-        role_prompts={
+    def __init__(self, mode="General"):
+
+        role_prompts = {
             "Code Analysis": "You are an expert code analyst. Break down and explain code clearly.",
             "Code Generator": "You are a senior developer. Generate high-quality, production-ready code.",
             "Debugger": "You are a debugging assistant. Find issues, explain them, and suggest fixes.",
@@ -17,4 +21,24 @@ class LangChainClient:
             "General": "You are a full-stack developer assistant. Help with any coding tasks."
         }
 
-        self.system_prompt =role_prompts.get
+        self.system_prompt = role_prompts.get(mode, role_prompts["General"])
+
+        self.model = ChatGoogleGenerativeAI(
+            model="gemini-2.5-flash",
+            temperature=0.2,
+            google_api_key=os.getenv("GOOGLE_API_KEY")
+        )
+
+    def chat(self, messages):
+        """Send messages to the Gemini model via LangChain and return reply."""
+
+        prompt_messages = [SystemMessage(content=self.system_prompt)]
+
+        for m in messages:
+            if m["role"] == "user":
+                prompt_messages.append(HumanMessage(content=m["content"]))
+            else:
+                prompt_messages.append(AIMessage(content=m["content"]))
+
+        response = self.model.invoke(prompt_messages)
+        return response.content
