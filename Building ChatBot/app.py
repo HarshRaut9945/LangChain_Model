@@ -135,8 +135,7 @@ def send_message(chat_id):
         User: {user_message}
         """
 
-        ai_response = llm.invoke(prompt)
-        ai_reply = ai_response.content.strip()
+        ai_response = llm.invoke(prompt) 
 
         # Store AI response
         c.execute(
