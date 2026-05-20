@@ -1,7 +1,7 @@
 import re
 from typing import List, Dict, Optional, Annotated
 
-from pydantic import BaseModel, Field, ValidationError, field_validator
+from pydantic import BaseModel, Field, ValidationError, field_validator,model_validator
 
 
 class Patient(BaseModel):
@@ -36,6 +36,14 @@ class Patient(BaseModel):
     @classmethod
     def transform_name(cls, value: str) -> str:
         return value.strip().title()
+    
+
+    @model_validator(mode='after')
+    def validate_emergency_conntact(cls,model):
+        if model.age>60 and 'emergency' not in model.contact_details:
+            raise ValueError('patient older than 60 must have an emergency contact')
+        
+        return model
 
 
 
