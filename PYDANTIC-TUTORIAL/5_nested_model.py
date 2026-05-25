@@ -9,7 +9,7 @@ class Address(BaseModel):
 class Patient(BaseModel):
 
     name: str
-    gender: str
+    gender: strgit 
     age: int
     address: Address
 
